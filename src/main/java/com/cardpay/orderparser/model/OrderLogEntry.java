@@ -8,6 +8,7 @@ import lombok.Data;
 public class OrderLogEntry {
     private Long id;
     private Double amount;
+    private String currency;
     private String comment;
     private String fileName;
     private long lineNumber;

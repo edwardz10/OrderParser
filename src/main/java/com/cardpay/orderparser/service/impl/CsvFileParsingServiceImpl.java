@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import static com.cardpay.orderparser.util.ParseUtil.parseCsvToOrder;
+import static com.cardpay.orderparser.util.ParseUtil.csvToOrder;
 
 @Service
 @Qualifier("csv")
@@ -19,6 +19,6 @@ public class CsvFileParsingServiceImpl extends TextFileParsingService {
 
     @Override
     protected Order parseLine(String line) throws Exception {
-        return parseCsvToOrder(line);
+        return csvToOrder(line);
     }
 }

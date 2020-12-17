@@ -1,0 +1,4 @@
+logging.level:
+#  root: ERROR
+#  com.cardpay.orderparser.Application: WARN
+  org.springframework.web: ERROR

@@ -33,6 +33,7 @@ public class OrderParserContainerImpl implements OrderParserContainer {
     @Override
     public void parse(Set<String> filePaths) {
         filePaths
+                .parallelStream()
                 .forEach(filePath -> {
                     try {
                         parsingServices.get(getFileExtension(filePath)).parse(filePath);
