@@ -1,14 +1,14 @@
 package com.cardpay.orderparser.service.impl;
 
 import com.cardpay.orderparser.exception.ParseException;
-import com.cardpay.orderparser.service.OrderParserContainer;
 import com.cardpay.orderparser.service.FileParsingService;
+import com.cardpay.orderparser.service.OrderParserContainer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static com.google.common.io.Files.getFileExtension;
 
@@ -20,7 +20,7 @@ public class OrderParserContainerImpl implements OrderParserContainer {
     private final Map<String, FileParsingService> parsingServices;
 
     @Override
-    public boolean isExtentionSupported(String extension) {
+    public boolean isExtensionSupported(String extension) {
         log.info("Extensions supported: {}, checking {}..."
                 , parsingServices.keySet()
                 , extension);
@@ -31,7 +31,7 @@ public class OrderParserContainerImpl implements OrderParserContainer {
     }
 
     @Override
-    public void parse(List<String> filePaths) {
+    public void parse(Set<String> filePaths) {
         filePaths
                 .forEach(filePath -> {
                     try {

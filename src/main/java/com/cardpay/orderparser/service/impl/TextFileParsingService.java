@@ -21,7 +21,7 @@ public abstract class TextFileParsingService extends BaseFileParsingService {
             String fileName = file.getName();
             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
-            Streams.mapWithIndex(lines.stream(),
+            Streams.mapWithIndex(lines.parallelStream(),
                     (str, index) -> {
                         Order order = null;
                         try {

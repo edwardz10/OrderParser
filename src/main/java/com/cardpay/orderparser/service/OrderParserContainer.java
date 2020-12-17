@@ -1,8 +1,8 @@
 package com.cardpay.orderparser.service;
 
-import java.util.List;
+import java.util.Set;
 
 public interface OrderParserContainer {
-    boolean isExtentionSupported(String extension);
-    void parse(List<String> filePaths);
+    boolean isExtensionSupported(String extension);
+    void parse(Set<String> filePaths);
 }

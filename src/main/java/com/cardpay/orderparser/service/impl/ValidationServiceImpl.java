@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.io.Files.getFileExtension;
 
@@ -19,7 +20,7 @@ public class ValidationServiceImpl implements ValidationService {
     private OrderParserContainer parserContainer;
 
     @Override
-    public void validate(List<String> args) throws ValidationException {
+    public void validate(Set<String> args) throws ValidationException {
         List<String> errorDetails = new LinkedList<>();
 
         if (args.size() == 0) {
@@ -35,7 +36,7 @@ public class ValidationServiceImpl implements ValidationService {
 
             String fileExtension = getFileExtension(arg);
 
-            if (!parserContainer.isExtentionSupported(fileExtension)) {
+            if (!parserContainer.isExtensionSupported(fileExtension)) {
                 errorDetails.add("Extension " + fileExtension + " not supported");
             }
         }
