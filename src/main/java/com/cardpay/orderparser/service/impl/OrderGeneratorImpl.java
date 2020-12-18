@@ -5,6 +5,7 @@ import com.cardpay.orderparser.enums.FileFormatEnum;
 import com.cardpay.orderparser.model.Order;
 import com.cardpay.orderparser.service.OrderGenerator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -21,6 +22,12 @@ import static com.cardpay.orderparser.util.ParseUtil.orderToJson;
 @Service
 @Slf4j
 public class OrderGeneratorImpl implements OrderGenerator {
+
+    @Value("${generator.null.period.amount}")
+    private Integer nullAmountPeriod;
+
+    @Value("${generator.null.period.currency}")
+    private Integer nullCurrencyPeriod;
 
     private final Random random = new Random();
 
@@ -50,11 +57,19 @@ public class OrderGeneratorImpl implements OrderGenerator {
     }
 
     private Order randomOrder(long id) {
-        return new Order(id, random.nextDouble()*1000d, randomCurrency(), "Generated");
+        return new Order(id, randomAmount(id), randomCurrency(id), "Generated");
     }
 
-    private String randomCurrency() {
-        return CurrencyEnum.values()[random.nextInt(CurrencyEnum.values().length)].name();
+    private String randomCurrency(Long id) {
+        return (nullCurrencyPeriod != 0 && id % nullCurrencyPeriod == 0)
+                ? null
+                : CurrencyEnum.values()[random.nextInt(CurrencyEnum.values().length)].name();
+    }
+
+    private Double randomAmount(Long id) {
+        return (nullAmountPeriod != 0 && id % nullAmountPeriod == 0)
+                ? null
+                : random.nextDouble()*1000d;
     }
 
     private String randomFileName(FileFormatEnum format) {

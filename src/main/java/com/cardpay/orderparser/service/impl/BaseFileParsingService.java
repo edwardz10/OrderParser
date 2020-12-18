@@ -1,5 +1,6 @@
 package com.cardpay.orderparser.service.impl;
 
+import com.cardpay.orderparser.enums.CurrencyEnum;
 import com.cardpay.orderparser.model.Order;
 import com.cardpay.orderparser.model.OrderLogEntry;
 import com.cardpay.orderparser.service.FileParsingService;
@@ -24,7 +25,7 @@ public abstract class BaseFileParsingService implements FileParsingService {
             return "Amount not defined";
         }
 
-        if (StringUtils.isEmpty(order.getCurrency())) {
+        if (StringUtils.isEmpty(order.getCurrency()) || CurrencyEnum.fromString(order.getCurrency()) == null) {
             return "Currency not defined";
         }
 

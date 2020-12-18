@@ -2,3 +2,7 @@ logging.level:
 #  root: ERROR
 #  com.cardpay.orderparser.Application: WARN
   org.springframework.web: ERROR
+
+generator.null.period:
+  amount: 10
+  currency: 36
